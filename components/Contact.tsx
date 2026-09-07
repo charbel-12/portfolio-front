@@ -1,0 +1,6 @@
+import { ArrowUpRight, Download, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { profile } from "@/lib/data";
+import Reveal from "./Reveal";
+export default function Contact() {
+ return <section id="contact" className="section-shell section-space"><Reveal><div className="contact-panel"><p className="eyebrow">05 / Get in touch</p><h2>Good software starts<br/>with a <span className="text-signal">conversation.</span></h2><p>Have a project, an engineering challenge, or a role in mind? Let’s connect.</p><a className="contact-email" href={`mailto:${profile.email}`}><Mail size={20}/><span>{profile.email}</span><ArrowUpRight size={22}/></a><div className="contact-links"><a href={`tel:${profile.phone.replace(/\s/g,"")}`}><Phone size={15}/>{profile.phone}</a><a href={profile.resumeHref} download><Download size={15}/>Download CV <span className="file-type">DOCX</span></a>{profile.github && <a href={profile.github} target="_blank" rel="noreferrer"><Github size={15}/>GitHub</a>}{profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={15}/>LinkedIn</a>}</div><p className="references-note">References available on request.</p></div></Reveal></section>;
+}
