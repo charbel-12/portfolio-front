@@ -16,3 +16,6 @@ CSS animates the hero and hover states. IntersectionObserver reveals below-the-f
 ## Hosting
 Sites uses the static export in `out/`; the project binding is recorded in `.openai/hosting.json`. Deployment is owner-only. Public sharing is managed separately.
 
+
+## Canonical domain
+Use `https://charbelmdawar.com` as the base URL for metadata, public links, and future site content.

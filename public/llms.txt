@@ -1,0 +1,26 @@
+# Charbel Mdawar — Software Engineer
+
+> Professional portfolio of Charbel Mdawar (شربل مدور), a software engineer based in Damascus, Syria, specializing in backend development and quality assurance.
+
+The website is available in English by default, with an Arabic language switch. Both languages describe the same experience and projects. The downloadable CV is a PDF.
+
+Charbel works with Java, Spring Boot, Laravel, secure APIs, identity and payment integrations, real-time systems, and software testing. His experience includes QA Manager at IXCoders, Java Spring Developer / Team Lead and Laravel Developer at Prokoders, and Quality Assurance Specialist at ecmarkt.com.
+
+Projects include CallX (a multi-tenant call center platform in development), Brag CRM, CryptoX, and quality assurance work on Al-Ahlam ERP & Manufacturing, Salaza ERP / CRM / HR, El-Salleh E-Commerce, GoPal, and Smo Al Mosafer. Project descriptions distinguish development work from validation and testing. External company links describe the organizations; they are not source-code repositories.
+
+## Portfolio and CV
+
+- [Portfolio](https://charbelmdawar.com/): Professional overview, expertise, experience, projects, education, and contact details.
+- [PDF CV](https://charbelmdawar.com/Charbel_Mdawar.pdf): Downloadable curriculum vitae.
+- [Projects](https://charbelmdawar.com/#work): Eight projects with descriptions, contributions, and relevant technologies.
+- [Experience](https://charbelmdawar.com/#experience): Employment history and responsibilities.
+- [Contact](https://charbelmdawar.com/#contact): Public professional contact information.
+
+## Optional
+
+- [Brag](https://brag-sa.com/): Saudi telecommunications retailer offering devices, installments, and after-sales services.
+- [Al-Ahlam](https://www.linkedin.com/company/alahlamsy): Syrian food manufacturer and exporter.
+- [Salaza Group](https://salazagroup.com/): Salon group operating across Syria, the UAE, and Iraq.
+- [El-Salleh](https://el-salleh.com/): Shopping and delivery platform in Syria.
+- [GoPal](https://gopalsa.com/): Children's activity discovery and booking platform in Saudi Arabia.
+- [Smo Al Mosafer](https://smoalmosafer.sa/): Transport booking and service-request project.
