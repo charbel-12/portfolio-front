@@ -212,3 +212,51 @@ html[dir="rtl"] { --font-display: Tahoma, Arial, sans-serif; --font-body: Tahoma
  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; }
 }
 @media (min-width: 901px) { .mobile-menu { display: none; } }
+
+.payment-showcase { margin-top: 32px; padding: 24px; border: 1px solid #293549; border-radius: 10px; background: radial-gradient(ellipse at 50% 65%, #2dd4bf09, transparent 65%), #0a101b; }
+.payment-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.payment-heading .eyebrow { line-height: 1.8; }
+.payment-motion-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; color: #a0adbf; font-size: 11px; flex-shrink: 0; }
+.payment-motion-toggle:hover { color: #2dd4bf; }
+.payment-providers { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; padding-top: 12px; }
+.payment-provider { --cube-size: 88px; --cube-half: 44px; --cube-color: #fb7185; --cube-bg: #321c2d; min-width: 0; text-align: center; }
+.payment-provider.stripe { --cube-color: #a89aff; --cube-bg: #24203f; }
+.payment-provider.cryptomus { --cube-color: #7be8c5; --cube-bg: #15362f; }
+.payment-provider > a { display: flex; flex-direction: column; align-items: center; border-radius: 8px; padding: 8px 0; }
+.payment-stage { position: relative; display: grid; place-items: center; width: 100%; height: 176px; perspective: 650px; direction: ltr; }
+.payment-float { display: block; width: var(--cube-size); height: var(--cube-size); transform-style: preserve-3d; animation: payment-float 5s ease-in-out infinite; }
+.stripe .payment-float { animation-delay: -1.7s; }
+.cryptomus .payment-float { animation-delay: -3.3s; }
+.payment-cube { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(-16deg) rotateY(-24deg); transition: transform 400ms ease; }
+.cube-face { position: absolute; inset: 0; display: grid; place-items: center; border: 1px solid var(--cube-color); background: var(--cube-bg); backface-visibility: hidden; }
+.cube-front { transform: translateZ(var(--cube-half)); background: linear-gradient(140deg,#ffffff0d,transparent),var(--cube-bg); }
+.cube-back { transform: rotateY(180deg) translateZ(var(--cube-half)); }
+.cube-right { transform: rotateY(90deg) translateZ(var(--cube-half)); }
+.cube-left { transform: rotateY(-90deg) translateZ(var(--cube-half)); }
+.cube-top { transform: rotateX(90deg) translateZ(var(--cube-half)); background: linear-gradient(#ffffff14,#ffffff14),var(--cube-bg); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(var(--cube-half)); }
+.cube-mark { color: var(--cube-color); font: 700 29px/1 Arial, sans-serif; letter-spacing: -.06em; }
+.stripe .cube-mark { font-size: 22px; }
+.cube-shadow { position: absolute; bottom: 10px; width: 90px; height: 12px; border-radius: 50%; background: #0008; filter: blur(5px); z-index: -1; }
+.payment-provider-name { display: flex; align-items: center; justify-content: center; gap: 8px; color: #b4c0d0; font-size: 12px; line-height: 1.6; }
+.payment-provider-name svg { flex-shrink: 0; color: var(--cube-color); }
+.payment-provider a:hover .payment-provider-name, .payment-provider a:focus-visible .payment-provider-name { color: var(--cube-color); }
+.payment-provider a:hover .payment-cube, .payment-provider a:focus-visible .payment-cube { transform: rotateX(-10deg) rotateY(-12deg); }
+.payment-provider a:hover .payment-float, .payment-provider a:focus-visible .payment-float, .payment-showcase.is-paused .payment-float { animation-play-state: paused; }
+@keyframes payment-float { 0%,100% { transform: translateY(4px); } 50% { transform: translateY(-12px); } }
+@media (max-width: 600px) {
+ .payment-showcase { padding: 16px 12px; }
+ .payment-heading { flex-wrap: wrap; gap: 4px; }
+ .payment-providers { gap: 10px; }
+ .payment-provider { --cube-size: 56px; --cube-half: 28px; }
+ .payment-stage { height: 126px; }
+ .cube-mark { font-size: 23px; }
+ .stripe .cube-mark { font-size: 16px; }
+ .payment-provider-name { flex-direction: column; gap: 5px; font-size: 10px; }
+ .cube-shadow { width: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .payment-float { animation: none; }
+ .payment-motion-toggle { display: none; }
+ .payment-provider a:hover .payment-cube, .payment-provider a:focus-visible .payment-cube { transform: rotateX(-16deg) rotateY(-24deg); }
+}

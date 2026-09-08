@@ -6,18 +6,21 @@ The website is available in English by default, with an Arabic language switch. 
 
 Charbel works with Java, Spring Boot, Laravel, secure APIs, identity and payment integrations, real-time systems, and software testing. His experience includes QA Manager at IXCoders, Java Spring Developer / Team Lead and Laravel Developer at Prokoders, and Quality Assurance Specialist at ecmarkt.com.
 
-Projects include CallX (a multi-tenant call center platform in development), Brag CRM, CryptoX, and quality assurance work on Al-Ahlam ERP & Manufacturing, Salaza ERP / CRM / HR, El-Salleh E-Commerce, GoPal, and Smo Al Mosafer. Project descriptions distinguish development work from validation and testing. External company links describe the organizations; they are not source-code repositories.
+Projects include CallX (a multi-tenant call center platform in development), Britrip, Brag CRM, CryptoX, and quality assurance work on Al-Ahlam ERP & Manufacturing, Salaza ERP / CRM / HR, El-Salleh E-Commerce, GoPal, and Smo Al Mosafer. Project descriptions distinguish development work from validation and testing. External company links describe the organizations; they are not source-code repositories.
+
+For Britrip, Charbel developed platform-wide SSO and payment systems with Spring Boot. Kafka was the central hub for events, and WebSocket delivered real-time notifications. Payment integrations include Network International, Stripe, and Cryptomus. He also built a support and ticketing system in Laravel; other Laravel backend developers connected their services to the shared SSO system.
 
 ## Portfolio and CV
 
 - [Portfolio](https://charbelmdawar.com/): Professional overview, expertise, experience, projects, education, and contact details.
 - [PDF CV](https://charbelmdawar.com/Charbel_Mdawar.pdf): Downloadable curriculum vitae.
-- [Projects](https://charbelmdawar.com/#work): Eight projects with descriptions, contributions, and relevant technologies.
+- [Projects](https://charbelmdawar.com/#work): Nine projects with descriptions, contributions, and relevant technologies.
 - [Experience](https://charbelmdawar.com/#experience): Employment history and responsibilities.
 - [Contact](https://charbelmdawar.com/#contact): Public professional contact information.
 
 ## Optional
 
+- [Britrip](https://britrip.com/): B2B travel platform for agencies and businesses; Spring Boot SSO and payments, plus Laravel support and ticketing.
 - [Brag](https://brag-sa.com/): Saudi telecommunications retailer offering devices, installments, and after-sales services.
 - [Al-Ahlam](https://www.linkedin.com/company/alahlamsy): Syrian food manufacturer and exporter.
 - [Salaza Group](https://salazagroup.com/): Salon group operating across Syria, the UAE, and Iraq.

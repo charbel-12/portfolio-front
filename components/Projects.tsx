@@ -2,6 +2,7 @@
 import { usePortfolio } from "./LanguageProvider";
 import { ArrowUpRight } from "lucide-react";
 import ArchitectureDiagram from "./ArchitectureDiagram";
+import PaymentCubes from "./PaymentCubes";
 import Reveal from "./Reveal";
 export default function Projects() {
  const { projects, t } = usePortfolio();
@@ -12,6 +13,7 @@ export default function Projects() {
       <div className="project-summary"><div><p className="eyebrow">{project.tagline}</p><h3 className={project.secondary ? "project-secondary-title" : ""}>{project.name}{project.href && <a href={project.href} target="_blank" rel="noreferrer" aria-label={`${t("Visit")} ${project.name}`}><ArrowUpRight aria-hidden="true" size={30}/></a>}</h3></div><p>{project.description}</p></div>
       {project.architecture && <ArchitectureDiagram/>}
       <div className="project-details">{project.highlights.map(item=><div key={item.title}><h4>{item.title}</h4><p>{item.detail}</p></div>)}</div>
+      {project.payments && <PaymentCubes/>}
       <ul className="tags project-tags">{project.stack.map(item=><li key={item}>{item}</li>)}</ul>
     </article></Reveal>)}</div><p className="projects-note">{t("More project details are included in the downloadable CV.")}</p>
   </section>;
