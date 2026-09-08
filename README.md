@@ -7,7 +7,7 @@ Run `npm install` if dependencies are missing, then `npm run dev`.
 Run `npx tsc --noEmit` for type checking and `npm run build` for the static production export in `out/`.
 
 ## Content
-Professional facts live in `lib/data.ts` and follow the supplied CV. Optional social URLs are omitted until verified. The downloadable original DOCX is in `public/`.
+Professional facts live in `lib/data.ts` and follow the supplied CV. Optional social URLs are omitted until verified. The downloadable PDF CV is in `public/`. Add the personal portrait at `public/charbel-mdawar.jpg` to populate the hero portrait.
 Update the content and downloadable file together when the CV changes.
 
 ## Motion and accessibility

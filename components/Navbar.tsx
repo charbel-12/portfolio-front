@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-const links = [{href:"#skills",label:"Expertise"},{href:"#work",label:"Work"},{href:"#experience",label:"Experience"},{href:"#about",label:"About"}];
+const links = [{href:"#skills",label:"Expertise"},{href:"#experience",label:"Experience"},{href:"#work",label:"Work"},{href:"#about",label:"About"}];
 export default function Navbar() {
  const [scrolled,setScrolled]=useState(false), [open,setOpen]=useState(false), [active,setActive]=useState("");
  const toggle=useRef<HTMLButtonElement>(null);
