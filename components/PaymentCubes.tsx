@@ -5,9 +5,9 @@ import { ArrowUpRight, Pause, Play } from "lucide-react";
 import { usePortfolio } from "./LanguageProvider";
 
 const providers = [
-  { name: "Network International", mark: "NI", href: "https://www.network.ae/en", theme: "network" },
-  { name: "Stripe", mark: "stripe", href: "https://stripe.com/", theme: "stripe" },
-  { name: "Cryptomus", mark: "C", href: "https://cryptomus.com/", theme: "cryptomus" },
+  { name: "Network International", logo: "/logo_resize.svg", href: "https://www.network.ae/en", theme: "network" },
+  { name: "Stripe", logo: "/Stripe-l9ogo.webp", href: "https://stripe.com/", theme: "stripe" },
+  { name: "Cryptomus", logo: "/cryptomus.webp", href: "https://cryptomus.com/", theme: "cryptomus" },
 ];
 const faces = ["front", "back", "right", "left", "top", "bottom"];
 
@@ -25,7 +25,7 @@ export default function PaymentCubes() {
     <ul className="payment-providers">{providers.map(provider => <li key={provider.name} className={`payment-provider ${provider.theme}`}>
       <a href={provider.href} target="_blank" rel="noreferrer" aria-label={`${t("Visit")} ${provider.name}`}>
         <span className="payment-stage" aria-hidden="true"><span className="payment-float"><span className="payment-cube" dir="ltr">
-          {faces.map(face => <span key={face} className={`cube-face cube-${face}`}>{face === "front" && <span className="cube-mark">{provider.mark}</span>}</span>)}
+          {faces.map(face => <span key={face} className={`cube-face cube-${face}`}><img className="cube-logo" src={provider.logo} alt="" width={100} height={40} loading="lazy"/></span>)}
         </span></span><span className="cube-shadow"/></span>
         <span className="payment-provider-name"><bdi>{provider.name}</bdi><ArrowUpRight size={13} aria-hidden="true"/></span>
       </a>

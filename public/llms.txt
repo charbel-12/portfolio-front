@@ -2,7 +2,7 @@
 
 > Professional portfolio of Charbel Mdawar (شربل مدور), a software engineer based in Damascus, Syria, specializing in backend development and quality assurance.
 
-The website is available in English by default, with an Arabic language switch. Both languages describe the same experience and projects. The downloadable CV is a PDF.
+The website is available in English by default, at https://charbelmdawar.com/, with a dedicated Arabic page at https://charbelmdawar.com/ar. Both languages describe the same experience and projects. The downloadable CV is a PDF.
 
 Charbel works with Java, Spring Boot, Laravel, secure APIs, identity and payment integrations, real-time systems, and software testing. His experience includes QA Manager at IXCoders, Java Spring Developer / Team Lead and Laravel Developer at Prokoders, and Quality Assurance Specialist at ecmarkt.com.
 
@@ -13,6 +13,7 @@ For Britrip, Charbel developed platform-wide SSO and payment systems with Spring
 ## Portfolio and CV
 
 - [Portfolio](https://charbelmdawar.com/): Professional overview, expertise, experience, projects, education, and contact details.
+- [Arabic portfolio](https://charbelmdawar.com/ar): Arabic content with right-to-left layout.
 - [PDF CV](https://charbelmdawar.com/Charbel_Mdawar.pdf): Downloadable curriculum vitae.
 - [Projects](https://charbelmdawar.com/#work): Nine projects with descriptions, contributions, and relevant technologies.
 - [Experience](https://charbelmdawar.com/#experience): Employment history and responsibilities.

@@ -1,19 +1,14 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import * as english from "@/lib/data";
 import { arabic } from "@/lib/arabic";
 
 type Language = "en" | "ar";
-const LanguageContext = createContext<{ language: Language; toggleLanguage: () => void } | null>(null);
+const LanguageContext = createContext<{ language: Language } | null>(null);
 
-export default function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
-  useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-  }, [language]);
-  return <LanguageContext.Provider value={{ language, toggleLanguage: () => setLanguage(current => current === "en" ? "ar" : "en") }}>{children}</LanguageContext.Provider>;
+export default function LanguageProvider({ children, language }: { children: ReactNode; language: Language }) {
+  return <LanguageContext.Provider value={{ language }}>{children}</LanguageContext.Provider>;
 }
 
 function translate<T,>(value: T): T {

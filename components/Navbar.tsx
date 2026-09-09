@@ -1,10 +1,11 @@
 "use client";
+import ThemeToggle from "./ThemeToggle";
 import { usePortfolio } from "./LanguageProvider";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 const links = [{href:"#skills",label:"Expertise"},{href:"#experience",label:"Experience"},{href:"#work",label:"Work"},{href:"#about",label:"About"}];
 export default function Navbar() {
- const { t, language, toggleLanguage } = usePortfolio();
+ const { t, language } = usePortfolio();
  const [scrolled,setScrolled]=useState(false), [open,setOpen]=useState(false), [active,setActive]=useState("");
  const toggle=useRef<HTMLButtonElement>(null);
  useEffect(()=>{
@@ -30,7 +31,7 @@ export default function Navbar() {
        <ul className="desktop-links">{links.map(link => <li key={link.href}><a className={active === link.href ? "active" : ""} aria-current={active === link.href ? "location" : undefined} href={link.href}>{t(link.label)}</a></li>)}</ul>
        <div className="nav-actions">
          <a className="nav-contact" href="#contact">{t("Let’s talk")}<ArrowUpRight size={14} aria-hidden="true"/></a>
-         <button className="language-toggle" type="button" onClick={toggleLanguage} aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"} lang={language === "en" ? "ar" : "en"} dir={language === "en" ? "rtl" : "ltr"}>{language === "en" ? "العربية" : "English"}</button>
+         <ThemeToggle/><a className="language-toggle" href={language === "en" ? "/ar" : "/"} hrefLang={language === "en" ? "ar" : "en"} aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"} lang={language === "en" ? "ar" : "en"} dir={language === "en" ? "rtl" : "ltr"}>{language === "en" ? "العربية" : "English"}</a>
          <button ref={toggle} type="button" className="menu-toggle" aria-label={t(open ? "Close navigation menu" : "Open navigation menu")} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button>
        </div>
      </nav>

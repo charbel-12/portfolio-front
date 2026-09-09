@@ -1,4 +1,5 @@
 "use client";
+import CompanyShapes from "./CompanyShapes";
 import { usePortfolio } from "./LanguageProvider";
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { useRef, useState, type PointerEvent } from "react";
@@ -34,6 +35,7 @@ export default function Hero() {
       <p>{profile.summary}</p>
       <div className="hero-actions"><a className="button button-primary" href="#work">{t("Explore my work")}{" "}<ArrowUpRight size={17}/></a><a className="button button-secondary" href={profile.resumeHref} download="Charbel_Mdawar.pdf" type="application/pdf">{t("Download CV")}{" "}<Download size={16}/><span className="file-type">{t("PDF")}</span></a></div>
     </div>
+    <CompanyShapes/>
     <div className="hero-foot hero-enter" style={{animationDelay:"280ms"}}><span>{hero.specialties.map((item,i)=><span className="specialty" key={item}>{i>0&&<i/>}{item}</span>)}</span><a href="#skills" aria-label={t("Explore expertise")}><ArrowDown size={18}/></a></div>
   </section>;
 }

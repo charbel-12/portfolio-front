@@ -13,7 +13,7 @@ const config: Config = {
         surface2: "#161D2E",
         line: "#212A3C",
         ink: "#E9EDF4",
-        muted: "#8A93A8",
+        muted: "var(--muted)",
         signal: "#2DD4BF",
         signalDim: "#1B6E63",
         pulse: "#F5A623",
