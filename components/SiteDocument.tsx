@@ -1,4 +1,4 @@
-import { pageMetadata, siteUrl } from "@/lib/seo";
+import { pageMetadata, siteUrl, personSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "@/app/globals.css";
@@ -17,6 +17,6 @@ export function portfolioMetadata(language: "en" | "ar"): Metadata {
 }
 
 export default function SiteDocument({ children, language }: { children: React.ReactNode; language: "en" | "ar" }) {
- const structuredData = { "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", "@id": siteUrl + "/#website", url: siteUrl, name: "Charbel Mdawar", inLanguage: ["en", "ar"] }, { "@type": "Person", "@id": siteUrl + "/#person", name: "Charbel Mdawar", url: siteUrl + "/about", image: siteUrl + "/charbel-mdawar.jpg", jobTitle: "Software Engineer", knowsLanguage: ["en", "ar"] }] };
+ const structuredData = { "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", "@id": siteUrl + "/#website", url: siteUrl, name: "Charbel Mdawar", inLanguage: ["en", "ar"] }, personSchema] };
  return <html lang={language} dir={language === "ar" ? "rtl" : "ltr"} suppressHydrationWarning className={`${display.variable} ${body.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{ __html: themeScript }}/><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}/></head><body><LanguageProvider language={language}>{children}</LanguageProvider></body></html>;
 }

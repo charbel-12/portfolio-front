@@ -26,6 +26,15 @@ for (const file of files) {
  for (const language of ["en", "ar", "x-default"]) assert.ok(links.some(tag => attribute(tag, "hrefLang") === language), `${file}: ${language} alternate`);
  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(match => JSON.parse(match[1])["@graph"] || []);
  assert.ok(schemas.some(item => item["@type"] === "Person"), `${file}: person schema`);
+ const person = schemas.find(item => item["@type"] === "Person");
+ assert.ok(person.sameAs.includes("https://github.com/charbel-12"), `${file}: verified GitHub identity`);
+ assert.ok(person.sameAs.includes("https://www.linkedin.com/in/charbel-mdawar-8274781ba"), `${file}: verified LinkedIn identity`);
+ if (/(^|[\\/])about\.html$/.test(file)) assert.equal(schemas.find(item => item["@type"] === "ProfilePage")?.mainEntity?.["@id"], person["@id"], `${file}: profile main entity`);
+ if (/(^|[\\/])work[\\/]/.test(file)) assert.ok(schemas.some(item => item["@type"] === "BreadcrumbList"), `${file}: project breadcrumbs`);
+ const socialUrl = attribute(meta.find(tag => attribute(tag, "property") === "og:image") || "", "content");
+ const social = fs.readFileSync(root + new URL(socialUrl).pathname);
+ assert.equal(social.readUInt32BE(16), 1200, `${file}: social image width`);
+ assert.equal(social.readUInt32BE(20), 630, `${file}: social image height`);
  if (/(^|[\\/])blog[\\/]/.test(file)) {
   const article = schemas.find(item => item["@type"] === "BlogPosting");
   assert.ok(article?.articleBody && article?.author?.name, `${file}: article content and author`);

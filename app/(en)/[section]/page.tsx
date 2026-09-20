@@ -1,4 +1,4 @@
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, sectionTitles } from "@/lib/seo";
 import PageSchema from "@/components/PageSchema";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ section: 
  const { section } = await params;
  if (!keys.includes(section)) notFound();
  const data = sections[section as SectionKey];
- const title = (data?.title.en ?? "Blog") + " | Charbel Mdawar";
+ const title = sectionTitles[section as keyof typeof sectionTitles].en;
  const description = data?.intro.en ?? "Notes on backend engineering, quality, and reliable systems.";
  return pageMetadata("en", "/" + section, title, description);
 }

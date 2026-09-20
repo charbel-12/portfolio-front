@@ -1,3 +1,4 @@
+import { deepDives } from "./deep-dives";
 import { experiencePosts } from "./experience-posts";
 export type Copy = { en: string; ar: string };
 const copy = (en: string, ar: string): Copy => ({ en, ar });
@@ -29,7 +30,7 @@ export const sections = {
  ]},
 };
 export type SectionKey = keyof typeof sections;
-export const posts = [
+const basePosts = [
  ...experiencePosts,
  { slug: "designing-reliable-api-contracts", category: copy("Backend engineering", "هندسة الخدمات الخلفية"), title: copy("Reliable APIs start with clear contracts", "واجهات موثوقة تبدأ بعقود واضحة"), summary: copy("Inputs, permissions, and failure states deserve as much attention as successful responses.", "تستحق المدخلات والصلاحيات وحالات الفشل اهتماماً يوازي الاستجابات الناجحة."), body: [
  [copy("Define behavior before implementation", "تحديد السلوك قبل التنفيذ"), copy("An endpoint is a promise to its callers. Before choosing a controller or database query, describe the resource, required fields, and valid state transitions. Consider a support ticket: creating it, assigning it, and closing it are different actions with different preconditions. Making those differences explicit keeps clients from guessing what the server will accept.", "واجهة البرمجة وعد لمستخدميها. قبل اختيار المتحكم أو استعلام قاعدة البيانات، حدد المورد والحقول المطلوبة وانتقالات الحالة الصحيحة. إنشاء تذكرة دعم وتعيينها وإغلاقها إجراءات مختلفة بشروط مختلفة. توضيح هذه الفروق يمنع التطبيقات المستهلكة من تخمين ما يقبله الخادم.")],
@@ -50,3 +51,5 @@ export const posts = [
  [copy("Test recovery as a feature", "اختبار التعافي كميزة"), copy("Disconnect a client, restart a consumer, delay an event, and deliver a duplicate. Check whether the system returns to a consistent state without creating duplicate business actions. Measure recovery time as well as steady-state latency. A real-time experience is only dependable when the recovery path receives the same attention as the live path.", "اقطع اتصال العميل وأعد تشغيل المستهلك وأخّر حدثاً وأرسل نسخة مكررة. تحقق من عودة النظام لحالة متسقة دون تكرار إجراءات العمل. قِس وقت التعافي إلى جانب زمن الاستجابة المعتاد. تعتمد موثوقية التجربة اللحظية على منح مسار التعافي اهتماماً يوازي المسار المباشر.")]
  ]},
 ];
+
+export const posts = basePosts.map(post => { const extra = deepDives[post.slug]; return extra ? { ...post, title: extra.title, body: [...post.body, ...extra.sections] } : post; });

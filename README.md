@@ -25,3 +25,9 @@ Sites uses the static export in `out/`; the project binding is recorded in `.ope
 ## Canonical domain
 Use `https://charbelmdawar.com` as the base URL for metadata, public links, and future site content.
 Set `NEXT_PUBLIC_SITE_URL` before building if the production domain changes; it controls metadata, structured data, robots.txt, and sitemap.xml together.
+
+Project routes are generated from `lib/case-studies.ts`; CV-grounded case-study copy links to related articles in both languages. `lib/deep-dives.ts` extends the SSO, payments, and Laravel articles with conceptual flows and primary references. Keep project-specific claims separate from illustrative engineering guidance.
+
+`npm run build` regenerates 1200 × 630 social cards and responsive WebP portraits before exporting. The source JPG remains available as a fallback. Motion-reduction and data-saving preferences use static company logos instead of downloading 3D models.
+
+The www redirect needs a Cloudflare zone rule; see [production settings](deployment/README.md) and the ready rule definition. The generated Next.js crawler routes are the single source for robots.txt and sitemap.xml.

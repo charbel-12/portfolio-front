@@ -18,6 +18,12 @@ export default function LogoModel({ src, fallback, paused, phase, onReady }: { s
     let inView = true;
     let frame = 0;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (motion.matches || connection?.saveData) {
+      setFailed(true);
+      onReady(src);
+      return;
+    }
     const disposeModel = (object: Group) => object.traverse(child => {
       const mesh = child as Mesh;
       if (!mesh.isMesh) return;

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prebuild": "node scripts/generate-assets.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.446.0",

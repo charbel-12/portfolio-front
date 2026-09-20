@@ -31,7 +31,7 @@ export default function CompanyShapes() {
     window.addEventListener("scroll", update, { passive: true });
     // Follow the actual headline height, including wrapped Arabic text.
     const hero = root.current?.closest(".hero");
-    const heading = hero?.querySelector("h1");
+    const heading = hero?.querySelector<HTMLElement>(".hero-tagline") ?? hero?.querySelector("h1");
     const position = () => {
       if (hero && heading && root.current) {
         root.current.style.top = `${heading.offsetTop + heading.offsetHeight + 6}px`;

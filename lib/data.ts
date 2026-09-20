@@ -4,6 +4,8 @@ export const profile: Profile = {
   summary: "Backend engineering with a quality-first mindset. I build secure services, connect real-time systems, and lead the testing that helps teams ship with confidence.",
   email: "charbel.mdawar45@gmail.com", phone: "+963 932 489 122",
   resumeHref: "/Charbel_Mdawar.pdf", imageHref: "/charbel-mdawar.jpg",
+  linkedin: "https://www.linkedin.com/in/charbel-mdawar-8274781ba",
+  github: "https://github.com/charbel-12",
 };
 export const hero = { headline: "Building secure systems.", accent: "Delivering reliable software.", specialties: ["Java & Spring Boot", "Laravel", "Quality Engineering"] };
 export const skillGroups = [
