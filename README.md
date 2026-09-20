@@ -1,6 +1,6 @@
 ﻿# Charbel Mdawar — Portfolio
 
-A single-page portfolio built with Next.js, TypeScript, and Tailwind CSS.
+A bilingual portfolio with dedicated section pages and engineering articles, built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Development
 Run `npm install` if dependencies are missing, then `npm run dev`.
@@ -9,6 +9,11 @@ Run `npx tsc --noEmit` for type checking and `npm run build` for the static prod
 ## Content
 Professional facts live in `lib/data.ts` and follow the supplied CV. Optional social URLs are omitted until verified. The downloadable PDF CV is in `public/`. Add the personal portrait at `public/charbel-mdawar.jpg` to populate the hero portrait.
 Update the content and downloadable file together when the CV changes.
+
+The homepage previews two projects, two roles, three expertise groups, and three articles. Dedicated pages show the complete content. Bilingual articles live in `lib/editorial.ts` and `lib/experience-posts.ts`; adding a post automatically includes it in the blog, static routes, and sitemap.
+
+## SEO
+Each page includes a title, description, canonical URL, English/Arabic alternate links, and Open Graph/Twitter metadata. Articles include BlogPosting and breadcrumb structured data. `app/sitemap.ts` and `app/robots.ts` generate static crawler files. Run `node scripts/verify-export.mjs` after a production build to verify metadata, structured data, preview limits, and exported links.
 
 ## Motion and accessibility
 CSS animates the hero and hover states. IntersectionObserver reveals below-the-fold sections once; content stays visible without JavaScript. Reduced-motion preferences disable entrances and smooth scrolling. Navigation supports keyboard use and Escape closes the mobile menu.
@@ -19,3 +24,4 @@ Sites uses the static export in `out/`; the project binding is recorded in `.ope
 
 ## Canonical domain
 Use `https://charbelmdawar.com` as the base URL for metadata, public links, and future site content.
+Set `NEXT_PUBLIC_SITE_URL` before building if the production domain changes; it controls metadata, structured data, robots.txt, and sitemap.xml together.

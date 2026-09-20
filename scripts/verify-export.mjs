@@ -1,0 +1,56 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+
+const root = "out";
+const files = fs.readdirSync(root, { recursive: true }).filter(file => file.endsWith(".html") && !/(^|[\\/])(404|_not-found)([\\/]|\.)/.test(file));
+const read = path => fs.readFileSync(`${root}/${path}`, "utf8");
+const count = (html, className) => [...html.matchAll(new RegExp(`class="${className}"`, "g"))].length;
+const attribute = (tag, key) => tag.match(new RegExp(`(?:^|\\s)${key}="([^"]*)"`))?.[1];
+let checkedLinks = 0;
+const canonicals = new Set();
+for (const file of files) {
+ const html = read(file);
+ const title = html.match(/<title>(.*?)<\/title>/)?.[1];
+ assert.ok(title, `${file}: title`);
+ const meta = [...html.matchAll(/<meta\s[^>]*>/g)].map(match => match[0]);
+ for (const name of ["description", "twitter:title", "twitter:description", "twitter:image"]) {
+  assert.ok(meta.some(tag => attribute(tag, "name") === name && attribute(tag, "content")), `${file}: ${name}`);
+ }
+ for (const property of ["og:title", "og:description", "og:image", "og:url", "og:locale"]) {
+  assert.ok(meta.some(tag => attribute(tag, "property") === property && attribute(tag, "content")), `${file}: ${property}`);
+ }
+ const links = [...html.matchAll(/<link\s[^>]*>/g)].map(match => match[0]);
+ const canonical = attribute(links.find(tag => attribute(tag, "rel") === "canonical") || "", "href");
+ assert.ok(canonical && !canonicals.has(canonical), `${file}: unique canonical`);
+ canonicals.add(canonical);
+ for (const language of ["en", "ar", "x-default"]) assert.ok(links.some(tag => attribute(tag, "hrefLang") === language), `${file}: ${language} alternate`);
+ const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(match => JSON.parse(match[1])["@graph"] || []);
+ assert.ok(schemas.some(item => item["@type"] === "Person"), `${file}: person schema`);
+ if (/(^|[\\/])blog[\\/]/.test(file)) {
+  const article = schemas.find(item => item["@type"] === "BlogPosting");
+  assert.ok(article?.articleBody && article?.author?.name, `${file}: article content and author`);
+  assert.equal(article.url, canonical, `${file}: article canonical`);
+  assert.ok(schemas.some(item => item["@type"] === "BreadcrumbList"), `${file}: breadcrumbs`);
+ }
+ for (const match of html.matchAll(/href="(\/[^"#?]*)[^\"]*"/g)) {
+  const href = decodeURI(match[1]);
+  if (href.startsWith("//") || href.startsWith("/_next")) continue;
+  assert.ok([root + href, root + href + ".html", root + href + "/index.html"].some(path => fs.existsSync(path)), `${file}: missing ${href}`);
+  checkedLinks++;
+ }
+}
+for (const prefix of ["", "ar/"]) {
+ const home = read(prefix ? "ar.html" : "index.html");
+ assert.equal(count(home, "project-card"), 2, `${prefix}home: two projects`);
+ assert.equal(count(home, "expertise-card"), 3, `${prefix}home: three expertise groups`);
+ assert.equal(count(home, "experience-row"), 2, `${prefix}home: two roles`);
+ assert.equal(count(home, "blog-card"), 3, `${prefix}home: three articles`);
+ assert.ok(count(read(prefix + "work.html"), "project-card") > 2, `${prefix}work: full projects`);
+ assert.equal(count(read(prefix + "blog.html"), "blog-card"), 8, `${prefix}blog: eight articles`);
+}
+const sitemap = read("sitemap.xml");
+const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+assert.equal(locations.length, canonicals.size, "sitemap contains every page exactly once");
+for (const url of canonicals) assert.ok(locations.includes(url), `sitemap missing ${url}`);
+assert.match(read("robots.txt"), /Sitemap: https?:\/\/.*\/sitemap\.xml/);
+console.log(`Verified ${files.length} pages, ${checkedLinks} internal links, metadata, schemas, sitemap, and homepage previews.`);

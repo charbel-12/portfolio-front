@@ -1,0 +1,22 @@
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import DetailPage from "@/components/DetailPage";
+import { sections, type SectionKey } from "@/lib/editorial";
+const keys = [...Object.keys(sections), "blog"];
+export const dynamicParams = false;
+export function generateStaticParams() { return keys.map(section => ({ section })); }
+export async function generateMetadata({ params }: { params: Promise<{ section: string }> }): Promise<Metadata> {
+ const { section } = await params;
+ if (!keys.includes(section)) notFound();
+ const data = sections[section as SectionKey];
+ const title = (data?.title.en ?? "Blog") + " | Charbel Mdawar";
+ const description = data?.intro.en ?? "Notes on backend engineering, quality, and reliable systems.";
+ return pageMetadata("en", "/" + section, title, description);
+}
+export default async function Page({ params }: { params: Promise<{ section: string }> }) {
+ const { section } = await params;
+ if (!keys.includes(section)) notFound();
+ return <><PageSchema language="en" section={section as SectionKey | "blog"}/><DetailPage section={section as SectionKey | "blog"}/></>;
+}

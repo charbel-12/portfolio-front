@@ -2,7 +2,7 @@ export type Profile = { name: string; role: string; location: string; summary: s
 export const profile: Profile = {
   name: "Charbel Mdawar", role: "Software Engineer", location: "Damascus, Syria",
   summary: "Backend engineering with a quality-first mindset. I build secure services, connect real-time systems, and lead the testing that helps teams ship with confidence.",
-  email: "charbel.mdawar45@gmail.com", phone: "+963 998 173 418",
+  email: "charbel.mdawar45@gmail.com", phone: "+963 932 489 122",
   resumeHref: "/Charbel_Mdawar.pdf", imageHref: "/charbel-mdawar.jpg",
 };
 export const hero = { headline: "Building secure systems.", accent: "Delivering reliable software.", specialties: ["Java & Spring Boot", "Laravel", "Quality Engineering"] };

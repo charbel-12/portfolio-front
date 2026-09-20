@@ -8,14 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0A0E17",
-        surface: "#111726",
-        surface2: "#161D2E",
-        line: "#212A3C",
-        ink: "#E9EDF4",
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        surface2: "var(--surface-alt)",
+        line: "var(--line)",
+        ink: "var(--ink)",
         muted: "var(--muted)",
-        signal: "#2DD4BF",
-        signalDim: "#1B6E63",
+        signal: "var(--accent)",
+        signalDim: "#1D4ED8",
         pulse: "#F5A623",
       },
       fontFamily: {
@@ -32,8 +32,8 @@ const config: Config = {
           "50%": { transform: "scaleY(1)" },
         },
         pulseDot: {
-          "0%, 100%": { opacity: "1", boxShadow: "0 0 0 0 rgba(45,212,191,0.5)" },
-          "50%": { opacity: "0.7", boxShadow: "0 0 0 6px rgba(45,212,191,0)" },
+          "0%, 100%": { opacity: "1", boxShadow: "0 0 0 0 rgba(59,130,246,0.5)" },
+          "50%": { opacity: "0.7", boxShadow: "0 0 0 6px rgba(59,130,246,0)" },
         },
         fadeUp: {
           from: { opacity: "0", transform: "translateY(16px)" },
