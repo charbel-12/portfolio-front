@@ -43,7 +43,7 @@ for (const prefix of ["", "ar/"]) {
  const home = read(prefix ? "ar.html" : "index.html");
  assert.equal(count(home, "project-card"), 2, `${prefix}home: two projects`);
  assert.equal(count(home, "expertise-card"), 3, `${prefix}home: three expertise groups`);
- assert.equal(count(home, "experience-row"), 2, `${prefix}home: two roles`);
+ assert.equal(count(home, "experience-row"), count(read(prefix + "experience.html"), "experience-row"), `${prefix}home: all roles`);
  assert.equal(count(home, "blog-card"), 3, `${prefix}home: three articles`);
  assert.ok(count(read(prefix + "work.html"), "project-card") > 2, `${prefix}work: full projects`);
  assert.equal(count(read(prefix + "blog.html"), "blog-card"), 8, `${prefix}blog: eight articles`);

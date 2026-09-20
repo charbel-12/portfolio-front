@@ -10,7 +10,7 @@ Run `npx tsc --noEmit` for type checking and `npm run build` for the static prod
 Professional facts live in `lib/data.ts` and follow the supplied CV. Optional social URLs are omitted until verified. The downloadable PDF CV is in `public/`. Add the personal portrait at `public/charbel-mdawar.jpg` to populate the hero portrait.
 Update the content and downloadable file together when the CV changes.
 
-The homepage previews two projects, two roles, three expertise groups, and three articles. Dedicated pages show the complete content. Bilingual articles live in `lib/editorial.ts` and `lib/experience-posts.ts`; adding a post automatically includes it in the blog, static routes, and sitemap.
+The homepage previews two projects, all experience roles, three expertise groups, and three articles. Dedicated pages show the complete content. Bilingual articles live in `lib/editorial.ts` and `lib/experience-posts.ts`; adding a post automatically includes it in the blog, static routes, and sitemap.
 
 ## SEO
 Each page includes a title, description, canonical URL, English/Arabic alternate links, and Open Graph/Twitter metadata. Articles include BlogPosting and breadcrumb structured data. `app/sitemap.ts` and `app/robots.ts` generate static crawler files. Run `node scripts/verify-export.mjs` after a production build to verify metadata, structured data, preview limits, and exported links.
