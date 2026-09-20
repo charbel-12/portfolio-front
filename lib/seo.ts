@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { profile, education, skillGroups } from "./data";
 
 export const sectionTitles = {
- expertise: { en: "Backend & QA Expertise | Charbel Mdawar", ar: "خبرات الخدمات الخلفية وضمان الجودة | شربل مدور" },
+ expertise: { en: "Backend & QA Engineering Expertise | Charbel Mdawar", ar: "خبرات هندسة الخدمات الخلفية وضمان الجودة | شربل مدور" },
  experience: { en: "Software Engineering Experience | Charbel Mdawar", ar: "الخبرة في هندسة البرمجيات | شربل مدور" },
  work: { en: "Software Engineering Projects | Charbel Mdawar", ar: "مشاريع هندسة البرمجيات | شربل مدور" },
  about: { en: "About Charbel Mdawar | Software Engineer", ar: "عن شربل مدور | مهندس برمجيات" },
- blog: { en: "Software Engineering Blog | Charbel Mdawar", ar: "مدونة هندسة البرمجيات | شربل مدور" },
+ blog: { en: "Backend & Quality Engineering Blog | Charbel Mdawar", ar: "مدونة الخدمات الخلفية وهندسة الجودة | شربل مدور" },
  contact: { en: "Contact Charbel Mdawar | Software Engineer", ar: "تواصل مع شربل مدور | مهندس برمجيات" },
 };
 

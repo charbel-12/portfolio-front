@@ -8,8 +8,12 @@ const count = (html, className) => [...html.matchAll(new RegExp(`class="${classN
 const attribute = (tag, key) => tag.match(new RegExp(`(?:^|\\s)${key}="([^"]*)"`))?.[1];
 let checkedLinks = 0;
 const canonicals = new Set();
+const alternatesByUrl = new Map();
+const normalizeUrl = value => new URL(value).href;
 for (const file of files) {
  const html = read(file);
+ const visibleHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "").replace(/<style\b[^>]*>[\s\S]*?<\/style>/g, "");
+ assert.doesNotMatch(visibleHtml, /\?{3,}|\uFFFD/, `${file}: corrupted visible text`);
  const title = html.match(/<title>(.*?)<\/title>/)?.[1];
  assert.ok(title, `${file}: title`);
  const meta = [...html.matchAll(/<meta\s[^>]*>/g)].map(match => match[0]);
@@ -19,11 +23,25 @@ for (const file of files) {
  for (const property of ["og:title", "og:description", "og:image", "og:url", "og:locale"]) {
   assert.ok(meta.some(tag => attribute(tag, "property") === property && attribute(tag, "content")), `${file}: ${property}`);
  }
- const links = [...html.matchAll(/<link\s[^>]*>/g)].map(match => match[0]);
+ const head = html.match(/<head>([\s\S]*?)<\/head>/)?.[1];
+ assert.ok(head, `${file}: HTML head`);
+ const links = [...head.matchAll(/<link\s[^>]*>/g)].map(match => match[0]);
  const canonical = attribute(links.find(tag => attribute(tag, "rel") === "canonical") || "", "href");
  assert.ok(canonical && !canonicals.has(canonical), `${file}: unique canonical`);
  canonicals.add(canonical);
- for (const language of ["en", "ar", "x-default"]) assert.ok(links.some(tag => attribute(tag, "hrefLang") === language), `${file}: ${language} alternate`);
+ const origin = new URL(canonical).origin;
+ const route = file.replaceAll("\\", "/").replace(/\.html$/, "").replace(/^index$/, "");
+ assert.equal(normalizeUrl(canonical), normalizeUrl(origin + "/" + route), `${file}: self-referencing canonical`);
+ const englishPath = route.replace(/^ar(?:\/|$)/, "");
+ const expected = { en: origin + "/" + englishPath, ar: origin + "/ar" + (englishPath ? "/" + englishPath : ""), "x-default": origin + "/" + englishPath };
+ const alternates = {};
+ for (const language of ["en", "ar", "x-default"]) {
+  const tag = links.find(tag => (attribute(tag, "hrefLang") ?? attribute(tag, "hreflang")) === language);
+  assert.ok(tag, `${file}: ${language} alternate in head`);
+  alternates[language] = normalizeUrl(attribute(tag, "href"));
+  assert.equal(alternates[language], normalizeUrl(expected[language]), `${file}: correct ${language} alternate`);
+ }
+ alternatesByUrl.set(normalizeUrl(canonical), alternates);
  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(match => JSON.parse(match[1])["@graph"] || []);
  assert.ok(schemas.some(item => item["@type"] === "Person"), `${file}: person schema`);
  const person = schemas.find(item => item["@type"] === "Person");
@@ -40,6 +58,16 @@ for (const file of files) {
   assert.ok(article?.articleBody && article?.author?.name, `${file}: article content and author`);
   assert.equal(article.url, canonical, `${file}: article canonical`);
   assert.ok(schemas.some(item => item["@type"] === "BreadcrumbList"), `${file}: breadcrumbs`);
+  if (/^ar[\\/]blog[\\/]/.test(file)) {
+   assert.match(visibleHtml, /بواسطة شربل مدور/, `${file}: Arabic author`);
+   if (visibleHtml.includes('class="technical-flow"')) assert.match(visibleHtml, /<figcaption>مسار توضيحي<\/figcaption>/, `${file}: Arabic flow caption`);
+  }
+  const targets = { "centralized-sso-enterprise-applications": "/work/britrip", "payment-integrations-state-transitions": "/work/britrip", "real-time-systems-and-recovery": "/work/callx", "erp-testing-business-rules-data-integrity": "/work/al-ahlam-erp" };
+  const slug = file.replaceAll("\\", "/").split("/").at(-1).replace(/\.html$/, "");
+  if (targets[slug]) {
+   const context = visibleHtml.match(/<p class="article-context">([\s\S]*?)<\/p>/)?.[1];
+   assert.ok(context?.includes(`href="${file.startsWith("ar") ? "/ar" : ""}${targets[slug]}"`), `${file}: contextual project link`);
+  }
  }
  for (const match of html.matchAll(/href="(\/[^"#?]*)[^\"]*"/g)) {
   const href = decodeURI(match[1]);
@@ -47,6 +75,9 @@ for (const file of files) {
   assert.ok([root + href, root + href + ".html", root + href + "/index.html"].some(path => fs.existsSync(path)), `${file}: missing ${href}`);
   checkedLinks++;
  }
+}
+for (const [url, alternates] of alternatesByUrl) {
+ for (const language of ["en", "ar"]) assert.deepEqual(alternatesByUrl.get(alternates[language]), alternates, `${url}: reciprocal ${language} alternates`);
 }
 for (const prefix of ["", "ar/"]) {
  const home = read(prefix ? "ar.html" : "index.html");
