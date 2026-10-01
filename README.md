@@ -13,13 +13,15 @@ Update the content and downloadable file together when the CV changes.
 The homepage previews two projects, all experience roles, three expertise groups, and three articles. Dedicated pages show the complete content. Bilingual articles live in `lib/editorial.ts` and `lib/experience-posts.ts`; adding a post automatically includes it in the blog, static routes, and sitemap.
 
 ## SEO
-Each page includes a title, description, canonical URL, English/Arabic alternate links, and Open Graph/Twitter metadata. Articles include BlogPosting and breadcrumb structured data. `app/sitemap.ts` and `app/robots.ts` generate static crawler files. Run `node scripts/verify-export.mjs` after a production build to verify metadata, structured data, preview limits, and exported links.
+Each page includes a title, description, canonical URL, English/Arabic alternate links, and Open Graph/Twitter metadata. Articles include BlogPosting and breadcrumb structured data. `app/sitemap.ts` and `app/robots.txt/route.ts` generate static crawler files. Run `node scripts/verify-export.mjs` after a production build to verify metadata, structured data, preview limits, and exported links.
 
 ## Motion and accessibility
 CSS animates the hero and hover states. IntersectionObserver reveals below-the-fold sections once; content stays visible without JavaScript. Reduced-motion preferences disable entrances and smooth scrolling. Navigation supports keyboard use and Escape closes the mobile menu.
 
 ## Hosting
-Sites uses the static export in `out/`; the project binding is recorded in `.openai/hosting.json`. Deployment is owner-only. Public sharing is managed separately.
+Production uses the static export in `out/` on a Netcup VPS with Nginx, behind Cloudflare DNS/proxy/CDN. See [agent discovery deployment](deployment/agent-discovery.md) for the Nginx configuration and generated Markdown map required for agent response headers and content negotiation.
+
+`npm run build` also generates the public portfolio API, OpenAPI description, API/ARD catalogs, agent skill index and digest, anonymous access guidance, and Markdown variants of all content pages. Run `npm run test:discovery` after building. Generated discovery files in `public/` are also refreshed by `npm run dev`; Nginx-specific behavior requires the deployment configuration. WebMCP tools retrieve public profile/project data in supporting browsers.
 
 
 ## Canonical domain

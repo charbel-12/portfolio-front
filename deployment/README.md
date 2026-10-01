@@ -1,5 +1,7 @@
 # Production settings
 
+Production runs on a Netcup VPS with Nginx behind Cloudflare DNS/proxy/CDN. See [agent discovery deployment](agent-discovery.md) for response headers, Markdown negotiation, discovery resources, and DNS follow-up. The Cloudflare Pages notes below apply only to a future migration; `_headers` does not configure Nginx.
+
 The Next.js app exports static files. Host redirects must run at the CDN or origin; a Next.js redirect cannot enforce the hostname in this export.
 
 `cloudflare-redirect.json` is a single rule definition for the existing zone's `http_request_dynamic_redirect` ruleset. Add it to the existing ruleset without replacing other rules. In the Cloudflare dashboard, use the same hostname match, dynamic target, 301 status, and preserve-query setting. Ensure the www DNS record is proxied. No Cloudflare account settings have been changed by this repository update.
